@@ -44,10 +44,9 @@ class PublicationRepository {
 
 	async getPublications(limit, offset) {
 		const publications = await Publication.findAndCountAll({
-			offset,
 			limit,
-
-			include: { model: User, attributes: ['name'] },
+			offset,
+			include: [{ model: User, attributes: ['name'] }],
 		})
 		return publications
 	}
@@ -73,7 +72,7 @@ class PublicationRepository {
 			order: [['createdAt', 'DESC']],
 			limit,
 			offset,
-			include: { model: User, attributes: ['name'] },
+			include: [{ model: User, attributes: ['name'] }],
 		})
 		return publications
 	}
