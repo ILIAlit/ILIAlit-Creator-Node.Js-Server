@@ -44,6 +44,10 @@ class PublicationRepository {
 
 	async getPublications(limit, offset) {
 		const publications = await Publication.findAndCountAll({
+			order: [
+				['likeCount', 'DESC'],
+				['id', 'ASC'],
+			],
 			limit,
 			offset,
 			include: [{ model: User, attributes: ['name'] }],
@@ -53,7 +57,10 @@ class PublicationRepository {
 
 	async getNewPublicationsByTag(tagId, limit, offset) {
 		const publications = await Publication.findAndCountAll({
-			order: [['createdAt', 'DESC']],
+			order: [
+				['createdAt', 'DESC'],
+				['id', 'ASC'],
+			],
 			limit,
 			offset,
 			include: [
@@ -69,7 +76,10 @@ class PublicationRepository {
 
 	async getNewPublications(limit, offset) {
 		const publications = await Publication.findAndCountAll({
-			order: [['createdAt', 'DESC']],
+			order: [
+				['createdAt', 'DESC'],
+				['id', 'ASC'],
+			],
 			limit,
 			offset,
 			include: [{ model: User, attributes: ['name'] }],
